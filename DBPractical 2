@@ -1,0 +1,148 @@
+mysql> create database AVCOE;
+Query OK, 1 row affected (0.20 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| avcoe              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use avcoe;
+Database changed
+
+mysql>create table T5Students(rollno int,name varchar(20),age int,marks int);
+Query OK, 0 rows affected (0.56 sec)
+
+mysql> insert into T5Student values(54, 'Akanksha', 20, 80);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into T5Student values(55, 'Om', 20, 78);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into T5Student values(60,'Mrudula', 21, 90);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> desc T5Student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| age    | int         | YES  |     | NULL    |       |
+| marks  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.12 sec)
+
+mysql> Select * from T5Student;
++--------+----------+------+-------+
+| rollno | name     | age  | marks |
++--------+----------+------+-------+
+|     54 | Akanksha |   20 |    80 |
+|     55 | Om       |   20 |    78 |
+|     60 | Mrudula  |   21 |    90 |
++--------+----------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Update T5Student set marks=60 where rollno=55
+    -> ;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from T5Student;
++--------+----------+------+-------+
+| rollno | name     | age  | marks |
++--------+----------+------+-------+
+|     54 | Akanksha |   20 |    80 |
+|     55 | Om       |   20 |    60 |
+|     60 | Mrudula  |   21 |    90 |
++--------+----------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table T5Student add city varchar(20);
+Query OK, 0 rows affected (0.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Select * from student;
+ERROR 1146 (42S02): Table 'avcoe.student' doesn't exist
+mysql> select * from T5Student;
++--------+----------+------+-------+------+
+| rollno | name     | age  | marks | city |
++--------+----------+------+-------+------+
+|     54 | Akanksha |   20 |    80 | NULL |
+|     55 | Om       |   20 |    60 | NULL |
+|     60 | Mrudula  |   21 |    90 | NULL |
++--------+----------+------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into T5Student values(2,'Viren',21,65,'Pune');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from T5Student;
++--------+----------+------+-------+------+
+| rollno | name     | age  | marks | city |
++--------+----------+------+-------+------+
+|     54 | Akanksha |   20 |    80 | NULL |
+|     55 | Om       |   20 |    60 | NULL |
+|     60 | Mrudula  |   21 |    90 | NULL |
+|      2 | Viren    |   21 |    65 | Pune |
++--------+----------+------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> select max(marks) from T5Student;
++------------+
+| max(marks) |
++------------+
+|         90 |
++------------+
+1 row in set (0.04 sec)
+
+mysql> select count(rollno) from T5Student;
++---------------+
+| count(rollno) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select Avg(marks) from T5Student;
++------------+
+| Avg(marks) |
++------------+
+|    73.7500 |
++------------+
+1 row in set (0.07 sec)
+
+select min(marks)from T5Students;
+MIN(MARKS)
+60
+
+mysql> delete from T5Student where rollno=55;
+Query OK, 1 row affected (0.22 sec)
+
+mysql> select * from T5Student;
++--------+----------+------+-------+------+
+| rollno | name     | age  | marks | city |
++--------+----------+------+-------+------+
+|     54 | Akanksha |   20 |    80 | NULL |
+|     60 | Mrudula  |   21 |    90 | NULL |
+|      2 | Viren    |   21 |    65 | Pune |
++--------+----------+------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> Truncate table T5Student;
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> select * from T5Student;
+Empty set (0.00 sec)
+
+mysql> Drop table T5Student;
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> select * from T5Student;
+ERROR 1146 (42S02): Table 'avcoe.t5student' doesn't exist

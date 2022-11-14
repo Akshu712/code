@@ -1,0 +1,195 @@
+
+mysql> create table officer(officer_id int ,officer_name varchar(20), address varchar(20));
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> insert into officer values(1,'ajit',nandur);
+ERROR 1054 (42S22): Unknown column 'nandur' in 'field list'
+mysql> insert into officer values(1,'ajit','nagar');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into officer values(2,'deepika','lucknow');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into officer values(3,'vimal','arunachal');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into officer values(4,'rahul','lucknow');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> create table student(student_id int,student_name varchar(20),course_name varchar(20));
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> insert into student values(1,'aryan','java');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into student values(2,'rohini','Hadoop');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values(3,'nisha','mongoDB');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from officer;
++------------+--------------+-----------+
+| officer_id | officer_name | address   |
++------------+--------------+-----------+
+|          1 | ajit         | nagar     |
+|          2 | deepika      | lucknow   |
+|          3 | vimal        | arunachal |
+|          4 | rahul        | lucknow   |
++------------+--------------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> select * from student;
++------------+--------------+-------------+
+| student_id | student_name | course_name |
++------------+--------------+-------------+
+|          1 | aryan        | java        |
+|          2 | rohini       | Hadoop      |
+|          3 | nisha        | mongoDB     |
++------------+--------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.address,student.course_name
+    -> from officer
+    -> inner join student
+    -> on officer.officer_id=student.student_id;
++--------------+-----------+-------------+
+| officer_name | address   | course_name |
++--------------+-----------+-------------+
+| ajit         | nagar     | java        |
+| deepika      | lucknow   | Hadoop      |
+| vimal        | arunachal | mongoDB     |
++--------------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.address,student.course_name from officer left join student on officer.officer_id=student.student_id;
++--------------+-----------+-------------+
+| officer_name | address   | course_name |
++--------------+-----------+-------------+
+| ajit         | nagar     | java        |
+| deepika      | lucknow   | Hadoop      |
+| vimal        | arunachal | mongoDB     |
+| rahul        | lucknow   | NULL        |
++--------------+-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.address,student.course_name from officer right join student on officer.officer_id=student.student_id;
++--------------+-----------+-------------+
+| officer_name | address   | course_name |
++--------------+-----------+-------------+
+| ajit         | nagar     | java        |
+| deepika      | lucknow   | Hadoop      |
+| vimal        | arunachal | mongoDB     |
++--------------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select officer.officer_name,officer.address,student.course_name,student.student_name from officer right join student on officer.officer_id=student.student_id;
++--------------+-----------+-------------+--------------+
+| officer_name | address   | course_name | student_name |
++--------------+-----------+-------------+--------------+
+| ajit         | nagar     | java        | aryan        |
+| deepika      | lucknow   | Hadoop      | rohini       |
+| vimal        | arunachal | mongoDB     | nisha        |
++--------------+-----------+-------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql>  
+
+
+
+*****************************************************\
+
+mysql> use avcoe;
+Database changed
+mysql> create table student(stu_id int, stu_name varchar(20), age int);
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> insert into student values(1, Anshu, 20);
+ERROR 1054 (42S22): Unknown column 'Anshu' in 'field list'
+mysql> insert into student values(1, 'Anshu', 20);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into student values(2, 'Kanishka', 19);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into student values(3, 'Mrudula', 21);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from student;
++--------+----------+------+
+| stu_id | stu_name | age  |
++--------+----------+------+
+|      1 | Anshu    |   20 |
+|      2 | Kanishka |   19 |
+|      3 | Mrudula  |   21 |
++--------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> create table sport(id int, Game varchar(20));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> insert into sport values(1, Cricket);
+ERROR 1054 (42S22): Unknown column 'Cricket' in 'field list'
+mysql> insert into sport values(1, 'Cricket');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into sport values(2, 'Badminton');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into sport values(3, 'Hochey');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into sport values(4, 'Football');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from sport;
++------+-----------+
+| id   | Game      |
++------+-----------+
+|    1 | Cricket   |
+|    2 | Badminton |
+|    3 | Hochey    |
+|    4 | Football  |
++------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select student.stu_name,student.age, sport.Game
+    -> from student
+    -> inner join sport
+    -> on
+    -> student.stu_id = sport.id;
++----------+------+-----------+
+| stu_name | age  | Game      |
++----------+------+-----------+
+| Anshu    |   20 | Cricket   |
+| Kanishka |   19 | Badminton |
+| Mrudula  |   21 | Hochey    |
++----------+------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select student.stu_name,student.age,sport.Game
+    -> from student
+    -> Left Join sport on student.stu_id = sport.id
+    -> ;
++----------+------+-----------+
+| stu_name | age  | Game      |
++----------+------+-----------+
+| Anshu    |   20 | Cricket   |
+| Kanishka |   19 | Badminton |
+| Mrudula  |   21 | Hochey    |
++----------+------+-----------+
+3 rows in set (0.03 sec)
+
+mysql> select student.stu_name,student.age, sport.Game
+    -> from student
+    -> Right join sport on student.stu_id = sport.ID;
++----------+------+-----------+
+| stu_name | age  | Game      |
++----------+------+-----------+
+| Anshu    |   20 | Cricket   |
+| Kanishka |   19 | Badminton |
+| Mrudula  |   21 | Hochey    |
+| NULL     | NULL | Football  |
++----------+------+-----------+
+4 rows in set (0.00 sec)
